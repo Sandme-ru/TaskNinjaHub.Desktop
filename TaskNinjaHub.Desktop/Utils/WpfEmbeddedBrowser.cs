@@ -1,75 +1,75 @@
-﻿using IdentityModel.OidcClient.Browser;
-using System.Windows.Controls;
+﻿using CefSharp;
+using CefSharp.Wpf;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using IdentityModel.OidcClient.Browser;
+using IBrowser = IdentityModel.OidcClient.Browser.IBrowser;
 
-namespace TaskNinjaHub.Desktop.Utils;
-
-public class WpfEmbeddedBrowser : IBrowser
+namespace TaskNinjaHub.Desktop.Utils
 {
-    private BrowserOptions _options = null;
-
-    public WpfEmbeddedBrowser()
+    public class WpfEmbeddedBrowser : IBrowser
     {
+        private BrowserOptions _options = null;
 
-    }
-
-    public async Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
-    {
-        _options = options;
-
-        var window = new Window
+        public WpfEmbeddedBrowser()
         {
-            Width = 900,
-            Height = 625,
-            Title = "IdentityServer Demo Login"
-        };
 
-        // Note: Unfortunately, WebBrowser is very limited and does not give sufficient information for 
-        //   robust error handling. The alternative is to use a system browser or third party embedded
-        //   library (which tend to balloon the size of your application and are complicated).
-        var webBrowser = new WebBrowser();
+        }
 
-        var signal = new SemaphoreSlim(0, 1);
-
-        var result = new BrowserResult()
+        public async Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
         {
-            ResultType = BrowserResultType.UserCancel
-        };
+            _options = options;
 
-        webBrowser.Navigating += (s, e) =>
-        {
-            if (BrowserIsNavigatingToRedirectUri(e.Uri))
+            var window = new Window
             {
-                e.Cancel = true;
+                Width = 900,
+                Height = 625,
+                Title = "IdentityServer Demo Login"
+            };
 
-                result = new BrowserResult()
+            var chromiumWebBrowser = new ChromiumWebBrowser();
+
+            var signal = new SemaphoreSlim(0, 1);
+
+            var result = new BrowserResult()
+            {
+                ResultType = BrowserResultType.UserCancel
+            };
+
+            chromiumWebBrowser.FrameLoadEnd += (s, e) =>
+            {
+                if (BrowserIsNavigatingToRedirectUri(e.Url))
                 {
-                    ResultType = BrowserResultType.Success,
-                    Response = e.Uri.AbsoluteUri
-                };
+                    result = new BrowserResult()
+                    {
+                        ResultType = BrowserResultType.Success,
+                        Response = e.Url
+                    };
 
+                    signal.Release();
+
+                    window.Dispatcher.Invoke(() => window.Close());
+                }
+            };
+
+            window.Closing += (s, e) =>
+            {
                 signal.Release();
+            };
 
-                window.Close();
-            }
-        };
+            window.Content = chromiumWebBrowser;
+            window.Show();
+            chromiumWebBrowser.Load(_options.StartUrl);
 
-        window.Closing += (s, e) =>
+            await signal.WaitAsync(cancellationToken);
+
+            return result;
+        }
+
+        private bool BrowserIsNavigatingToRedirectUri(string url)
         {
-            signal.Release();
-        };
-
-        window.Content = webBrowser;
-        window.Show();
-        webBrowser.Source = new Uri(_options.StartUrl);
-
-        await signal.WaitAsync(cancellationToken);
-
-        return result;
-    }
-
-    private bool BrowserIsNavigatingToRedirectUri(Uri uri)
-    {
-        return uri.AbsoluteUri.StartsWith(_options.EndUrl);
+            return url.StartsWith(_options.EndUrl);
+        }
     }
 }
