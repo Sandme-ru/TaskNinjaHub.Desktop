@@ -1,5 +1,6 @@
 ﻿using IdentityModel.OidcClient;
 using System.Windows;
+using TaskNinjaHub.Desktop.Services;
 using TaskNinjaHub.Desktop.Utils;
 
 namespace TaskNinjaHub.Desktop
@@ -9,7 +10,7 @@ namespace TaskNinjaHub.Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        private OidcClient _oidcClient = null;
+        private OidcClient? _oidcClient = null!;
 
         public MainWindow()
         {
@@ -32,6 +33,7 @@ namespace TaskNinjaHub.Desktop
             _oidcClient = new OidcClient(options);
 
             LoginResult result;
+
             try
             {
                 result = await _oidcClient.LoginAsync();
@@ -48,7 +50,8 @@ namespace TaskNinjaHub.Desktop
             }
             else
             {
-                var name = result.User.Identity.Name;
+                var name = result.User.Identity?.Name;
+                UserProvider.User = result.User.Claims;
                 Message.Text = $"Hello {name}";
             }
         }
