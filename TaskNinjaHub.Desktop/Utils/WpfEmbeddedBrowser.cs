@@ -25,14 +25,14 @@ namespace TaskNinjaHub.Desktop.Utils
             {
                 Width = 900,
                 Height = 625,
-                Title = "IdentityServer Demo Login"
+                Title = "Авторизация"
             };
 
             var chromiumWebBrowser = new ChromiumWebBrowser();
 
             var signal = new SemaphoreSlim(0, 1);
 
-            var result = new BrowserResult()
+            var result = new BrowserResult
             {
                 ResultType = BrowserResultType.UserCancel
             };
@@ -41,7 +41,7 @@ namespace TaskNinjaHub.Desktop.Utils
             {
                 if (BrowserIsNavigatingToRedirectUri(e.Url))
                 {
-                    result = new BrowserResult()
+                    result = new BrowserResult
                     {
                         ResultType = BrowserResultType.Success,
                         Response = e.Url
