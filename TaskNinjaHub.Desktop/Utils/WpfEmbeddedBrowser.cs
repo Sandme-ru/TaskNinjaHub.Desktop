@@ -1,7 +1,4 @@
-﻿using CefSharp;
-using CefSharp.Wpf;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using CefSharp.Wpf;
 using System.Windows;
 using IdentityModel.OidcClient.Browser;
 using IBrowser = IdentityModel.OidcClient.Browser.IBrowser;
@@ -10,12 +7,7 @@ namespace TaskNinjaHub.Desktop.Utils
 {
     public class WpfEmbeddedBrowser : IBrowser
     {
-        private BrowserOptions _options = null;
-
-        public WpfEmbeddedBrowser()
-        {
-
-        }
+        private BrowserOptions _options = null!;
 
         public async Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
         {
@@ -60,9 +52,12 @@ namespace TaskNinjaHub.Desktop.Utils
 
             window.Content = chromiumWebBrowser;
             window.Show();
-            chromiumWebBrowser.Load(_options.StartUrl);
+            var response = await chromiumWebBrowser.LoadUrlAsync(_options.StartUrl);
 
             await signal.WaitAsync(cancellationToken);
+            
+            if (!response.Success)
+                MessageBox.Show(response.ErrorCode.ToString());
 
             return result;
         }
