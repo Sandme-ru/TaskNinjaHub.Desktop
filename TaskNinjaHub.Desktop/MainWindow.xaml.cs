@@ -1,7 +1,9 @@
 ﻿using IdentityModel.OidcClient;
 using System.Windows;
-using TaskNinjaHub.Desktop.Services;
-using TaskNinjaHub.Desktop.Utils;
+using TaskNinjaHub.Desktop.Services.UserProviderService;
+using TaskNinjaHub.Desktop.Utils.Browser;
+using TaskNinjaHub.Desktop.Utils.Storages;
+using TaskNinjaHub.Desktop.Windows.Menu;
 
 namespace TaskNinjaHub.Desktop
 {
@@ -22,7 +24,7 @@ namespace TaskNinjaHub.Desktop
         {
             var options = new OidcClientOptions
             {
-                Authority = "https://localhost:7219/",
+                Authority = "https://auth.sandme.ru",
                 ClientId = "TaskNinjaHub",
                 ClientSecret = "901564A5-E7FE-42CB-B10D-61EF6A8F3655",
                 Scope = "openid profile email",
@@ -50,9 +52,14 @@ namespace TaskNinjaHub.Desktop
             }
             else
             {
+                UserProvider.GetUser(result.AccessToken);
                 var name = result.User.Identity?.Name;
-                UserProvider.User = result.User.Claims;
-                Message.Text = $"Hello {name}";
+
+                PropertyStorage.Username = UserProvider.User.Name;
+
+                MainMenuWindow mainMenuWindow = new MainMenuWindow();
+                this.Hide();
+                mainMenuWindow.Show();
             }
         }
     }
