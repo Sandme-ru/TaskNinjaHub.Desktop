@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
-using TaskNinjaHub.Desktop.Models;
+using TaskNinjaHub.Desktop.Models.Token;
 
-namespace TaskNinjaHub.Desktop.Services;
+namespace TaskNinjaHub.Desktop.Services.UserProviderService;
 
 public class UserProvider
 {
@@ -43,9 +43,9 @@ public class UserProvider
                     break;
             }
         }
-        
+
         User = userToken;
-        
+
         return userToken;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TaskNinjaHub.Desktop.Models;
+namespace TaskNinjaHub.Desktop.Models.Token;
 
 public class UserTokenModel
 {

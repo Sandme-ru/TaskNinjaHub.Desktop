@@ -3,7 +3,7 @@ using System.Windows;
 using IdentityModel.OidcClient.Browser;
 using IBrowser = IdentityModel.OidcClient.Browser.IBrowser;
 
-namespace TaskNinjaHub.Desktop.Utils
+namespace TaskNinjaHub.Desktop.Utils.Browser
 {
     public class WpfEmbeddedBrowser : IBrowser
     {
@@ -55,7 +55,7 @@ namespace TaskNinjaHub.Desktop.Utils
             var response = await chromiumWebBrowser.LoadUrlAsync(_options.StartUrl);
 
             await signal.WaitAsync(cancellationToken);
-            
+
             if (!response.Success)
                 MessageBox.Show(response.ErrorCode.ToString());
 
