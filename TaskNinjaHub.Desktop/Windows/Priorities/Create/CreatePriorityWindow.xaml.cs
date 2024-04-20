@@ -1,27 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using TaskNinjaHub.Desktop.Models.Priorities;
+using TaskNinjaHub.Desktop.Services.HttpClientServices;
+using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
+using TaskNinjaHub.Desktop.Utils.Storages;
+using TaskNinjaHub.Desktop.Windows.Priorities.List;
+using TaskNinjaHub.Desktop.Windows.Types.List;
 
-namespace TaskNinjaHub.Desktop.Windows.Priorities.Create
+namespace TaskNinjaHub.Desktop.Windows.Priorities.Create;
+
+/// <summary>
+/// Логика взаимодействия для CreatePriorityWindow.xaml
+/// </summary>
+public partial class CreatePriorityWindow : Window
 {
-    /// <summary>
-    /// Логика взаимодействия для CreatePriorityWindow.xaml
-    /// </summary>
-    public partial class CreatePriorityWindow : Window
+    private PriorityService _priorityService;
+    public CreatePriorityWindow()
     {
-        public CreatePriorityWindow()
+        InitializeComponent();
+        NameTextBlock.Text = PropertyStorage.Username;
+    }
+
+    public void InjectTaskTypeService(PriorityService priorityService)
+    {
+        _priorityService = priorityService;
+    }
+
+    private async void CreateButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (NameBox.Text.Length > 0)
         {
-            InitializeComponent();
+            Models.Priorities.Priority catalogTaskType = new Priority()
+            {
+                Name = NameBox.Text
+            };
+
+            var result = await _priorityService.CreateAsync(catalogTaskType);
+
+            if (result.Success)
+            {
+                MessageBox.Show("Тип задачиуспешно добавлен");
+                PriorityService priorityService = new PriorityService(new HttpClientFactory());
+                PriorityListWindow window = new PriorityListWindow();
+                window.InjectTaskTypeService(priorityService);
+                window.Show();
+                this.Hide();
+            }
         }
+        else
+        {
+            MessageBox.Show("Введите название для типа задачи");
+        }
+    }
+
+    private void backButton_Click(object sender, RoutedEventArgs e)
+    {
+        PriorityService priorityService = new PriorityService(new HttpClientFactory());
+        PriorityListWindow window = new PriorityListWindow();
+        window.InjectTaskTypeService(priorityService);
+        window.Show();
+        this.Hide();
+    }
+
+    private void UpdateButton_Click(object sender, RoutedEventArgs e)
+    {
+        PriorityService priorityService = new PriorityService(new HttpClientFactory());
+        PriorityListWindow window = new PriorityListWindow();
+        window.InjectTaskTypeService(priorityService);
+        window.Show();
+        this.Hide();
     }
 }

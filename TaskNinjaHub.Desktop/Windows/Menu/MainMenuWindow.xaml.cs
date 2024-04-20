@@ -55,7 +55,9 @@ namespace TaskNinjaHub.Desktop.Windows.Menu
 
         private void prioritiesButton_Click(object sender, RoutedEventArgs e)
         {
-            PriorityListWindow prioritiesListWindow = new();
+            PriorityListWindow prioritiesListWindow = new PriorityListWindow();
+            PriorityService priorityService = new PriorityService(new HttpClientFactory());
+            prioritiesListWindow.InjectTaskTypeService(priorityService);
             this.Hide();
             prioritiesListWindow.Show();
         }

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using TaskNinjaHub.Desktop.Services.HttpClientServices;
 using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
+using TaskNinjaHub.Desktop.Utils.Storages;
 using TaskNinjaHub.Desktop.Windows.Types.List;
 using CatalogTaskType = TaskNinjaHub.Desktop.Models.TaskTypes.CatalogTaskType;
 
@@ -20,6 +21,7 @@ namespace TaskNinjaHub.Desktop.Windows.Types.Update
             InitializeComponent();
             _catalogTaskType = TypeListWindow.CatalogTaskType;
             NameBox.Text = _catalogTaskType.Name;
+            NameTextBlock.Text = PropertyStorage.Username;
         }
 
         public void InjectTaskTypeService(TaskTypeService taskTypeService)

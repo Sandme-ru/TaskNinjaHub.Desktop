@@ -91,6 +91,10 @@ namespace TaskNinjaHub.Desktop.Windows.Types.List
             if (CatalogTaskType != null!)
             {
                 await _taskTypeService.DeleteAsync(CatalogTaskType.Id);
+                var typesList = await GetAllTypes();
+                TypesDataGrid.ItemsSource = typesList;
+
+                MessageBox.Show("Тип успешно удален");
             }
             else
             {
