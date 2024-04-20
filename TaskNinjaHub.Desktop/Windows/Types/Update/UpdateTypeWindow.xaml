@@ -4,9 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskNinjaHub.Desktop.Windows.Types.Update"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="UpdateTypeWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="224*"/>
+            <ColumnDefinition Width="71*"/>
+            <ColumnDefinition Width="196*"/>
+            <ColumnDefinition Width="267*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="178*"/>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="65*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="NameTextBlock" Grid.Column="4" TextWrapping="Wrap" Text="" Margin="1,7,0,0" FontSize="18"/>
+        <Button Grid.Column="2" Grid.ColumnSpan="2" Name="CreateButton" Content="Обновить" Grid.Row="3" Margin="10,10,10,10" Background="#FF1890FF" BorderBrush="#FF1890FF" Foreground="White" FontSize="14" FontWeight="Bold" Click="CreateButton_Click"/>
+        <Button Grid.Column="2" Name="CancleButton" Content="Отменить" Grid.Row="4" Margin="10,10,10,10" Background="#FFF9F9F9" BorderBrush="#FFF93939" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" Click="CancleButton_Click"/>
+        <TextBlock Grid.Column="2" Grid.Row="1" TextWrapping="Wrap" Text="Название" Grid.ColumnSpan="2" Margin="0,83,195,0" Grid.RowSpan="2"/>
+        <TextBox Grid.Column="3" Grid.Row="1" TextWrapping="Wrap" Name="NameBox" Text="" VerticalAlignment="Top" Height="18" Margin="0,83,0,0" Grid.RowSpan="2" />
+        <Button fa:Awesome.Content="ArrowLeft" Background="White" BorderBrush="#FFFFFDFD" Name="backButton" Click="backButton_Click" Grid.ColumnSpan="2" Height="43" Margin="0,0,224,0" VerticalAlignment="Top"></Button>
     </Grid>
 </Window>

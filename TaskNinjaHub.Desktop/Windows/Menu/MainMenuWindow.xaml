@@ -21,10 +21,10 @@
             <RowDefinition Height="45*"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="NameTextBlock" Grid.Column="4" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="" Margin="0, 7, 0, 0" FontSize="18"/>
-        <Button Content="Управление пользователями" Margin="10" x:Name="usersButton" Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="2" Click="usersButton_Click"/>
-        <Button Content="Управление ролями" Margin="10" x:Name="rolesButton" Grid.Column="2"  Grid.Row="1" Grid.ColumnSpan="2" Click="rolesButton_Click"/>
-        <Button Content="Управление информационными системами" Margin="10" x:Name="informationSystemsButton" Grid.Column="4"  Grid.Row="1" Grid.ColumnSpan="2" Click="informationSystemsButton_Click"/>
-        <Button Content="Управление типами задач" Margin="10" x:Name="typesButton" Grid.Column="1"  Grid.Row="2" Grid.ColumnSpan="2" Click="typesButton_Click"/>
-        <Button Content="Управление приоритетами" Margin="10" x:Name="prioritiesButton" Grid.Column="3"  Grid.Row="2" Grid.ColumnSpan="2" Click="prioritiesButton_Click"/>
+        <Button Content="Управление пользователями" Margin="10" x:Name="usersButton" Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="2" Click="usersButton_Click" Background="White" BorderBrush="#FF1890FF" FontSize="14" FontWeight="Bold"/>
+        <Button Content="Управление ролями" Margin="10" x:Name="rolesButton" Grid.Column="2"  Grid.Row="1" Grid.ColumnSpan="2" Click="rolesButton_Click" Background="White" BorderBrush="#FF1890FF" FontSize="14" FontWeight="Bold"/>
+        <Button Content="Управление информационными системами" Margin="10" x:Name="informationSystemsButton" Grid.Column="4"  Grid.Row="1" Grid.ColumnSpan="2" Click="informationSystemsButton_Click" Background="White" BorderBrush="#FF1890FF" FontSize="14" FontWeight="Bold"/>
+        <Button Content="Управление типами задач" Margin="10" x:Name="typesButton" Grid.Column="1"  Grid.Row="2" Grid.ColumnSpan="2" Click="typesButton_Click" Background="White" BorderBrush="#FF1890FF" FontSize="14" FontWeight="Bold"/>
+        <Button Content="Управление приоритетами" Margin="10" x:Name="prioritiesButton" Grid.Column="3"  Grid.Row="2" Grid.ColumnSpan="2" Click="prioritiesButton_Click" Background="White" BorderBrush="#FF1890FF" FontSize="14" FontWeight="Bold"/>
     </Grid>
 </Window>

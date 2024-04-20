@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.WebUtilities;
+using TaskNinjaHub.Application.Entities.TaskTypes.Domain;
 using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
 using TaskNinjaHub.Desktop.Utils.HttpHelperExtensions;
 using TaskNinjaHub.Desktop.Utils.OperationResults;
