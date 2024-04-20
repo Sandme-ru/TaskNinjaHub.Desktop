@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using TaskNinjaHub.Desktop.Services.HttpClientServices;
+using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
 using TaskNinjaHub.Desktop.Utils.Storages;
 using TaskNinjaHub.Desktop.Windows.InformationSystems.List;
 using TaskNinjaHub.Desktop.Windows.Priorities.List;
@@ -37,21 +39,27 @@ namespace TaskNinjaHub.Desktop.Windows.Menu
 
         private void informationSystemsButton_Click(object sender, RoutedEventArgs e)
         {
-            InformationSystemListWindow informationSystemListWindow = new();
+            InformationSystemService informationSystemService = new InformationSystemService(new HttpClientFactory());
+            InformationSystemListWindow informationSystemListWindow = new InformationSystemListWindow();
+            informationSystemListWindow.InjectTaskTypeService(informationSystemService);
             this.Hide();
             informationSystemListWindow.Show();
         }
 
         private void typesButton_Click(object sender, RoutedEventArgs e)
         {
-            TypeListWindow typeListWindow = new();
+            TaskTypeService taskTypeService = new TaskTypeService(new HttpClientFactory());
+            TypeListWindow window = new TypeListWindow();
+            window.InjectTaskTypeService(taskTypeService);
+            window.Show();
             this.Hide();
-            typeListWindow.Show();
         }
 
         private void prioritiesButton_Click(object sender, RoutedEventArgs e)
         {
-            PriorityListWindow prioritiesListWindow = new();
+            PriorityListWindow prioritiesListWindow = new PriorityListWindow();
+            PriorityService priorityService = new PriorityService(new HttpClientFactory());
+            prioritiesListWindow.InjectTaskTypeService(priorityService);
             this.Hide();
             prioritiesListWindow.Show();
         }

@@ -1,27 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using TaskNinjaHub.Desktop.Models.InformationSystems;
+using TaskNinjaHub.Desktop.Services.HttpClientServices;
+using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
+using TaskNinjaHub.Desktop.Utils.Storages;
+using TaskNinjaHub.Desktop.Windows.InformationSystems.Create;
+using TaskNinjaHub.Desktop.Windows.InformationSystems.List;
+using TaskNinjaHub.Desktop.Windows.Priorities.List;
 
-namespace TaskNinjaHub.Desktop.Windows.InformationSystems.Update
+namespace TaskNinjaHub.Desktop.Windows.InformationSystems.Update;
+
+/// <summary>
+/// Логика взаимодействия для UpdateInformationSystemWindow.xaml
+/// </summary>
+public partial class UpdateInformationSystemWindow : Window
 {
-    /// <summary>
-    /// Логика взаимодействия для UpdateInformationSystemWindow.xaml
-    /// </summary>
-    public partial class UpdateInformationSystemWindow : Window
+    private InformationSystemService _systemService;
+
+    private InformationSystem _informationSystem;
+
+    public UpdateInformationSystemWindow()
     {
-        public UpdateInformationSystemWindow()
+        InitializeComponent();
+        _informationSystem = InformationSystemListWindow.InformationSystem;
+        NameBox.Text = _informationSystem.Name;
+        NameTextBlock.Text = PropertyStorage.Username;
+    }
+    public void InjectTaskTypeService(InformationSystemService informationSystem)
+    {
+        _systemService = informationSystem;
+    }
+
+    private async void CreateButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (NameBox.Text.Length > 0)
         {
-            InitializeComponent();
+            _informationSystem.Name = NameBox.Text;
+
+            var result = await _systemService.UpdateAsync(_informationSystem);
+
+            if (result.Success)
+            {
+                MessageBox.Show("Информационная система успешно обновлена");
+                InformationSystemService informationSystemService = new InformationSystemService(new HttpClientFactory());
+                InformationSystemListWindow window = new InformationSystemListWindow();
+                window.InjectTaskTypeService(informationSystemService);
+                window.Show();
+                this.Hide();
+            }
         }
+        else
+        {
+            MessageBox.Show("Введите название для информационной системы");
+        }
+    }
+
+    private void backButton_Click(object sender, RoutedEventArgs e)
+    {
+        InformationSystemService informationSystemService = new InformationSystemService(new HttpClientFactory());
+        InformationSystemListWindow window = new InformationSystemListWindow();
+        window.InjectTaskTypeService(informationSystemService);
+        window.Show();
+        this.Hide();
+    }
+
+    private void CancleButton_Click(object sender, RoutedEventArgs e)
+    {
+        InformationSystemService informationSystemService = new InformationSystemService(new HttpClientFactory());
+        InformationSystemListWindow window = new InformationSystemListWindow();
+        window.InjectTaskTypeService(informationSystemService);
+        window.Show();
+        this.Hide();
     }
 }

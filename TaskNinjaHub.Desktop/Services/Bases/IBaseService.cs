@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using TaskNinjaHub.Application.Entities.TaskTypes.Domain;
 using TaskNinjaHub.Desktop.Utils.OperationResults;
 
 namespace TaskNinjaHub.Desktop.Services.Bases;
