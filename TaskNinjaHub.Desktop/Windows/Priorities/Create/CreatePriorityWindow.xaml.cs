@@ -38,7 +38,7 @@ public partial class CreatePriorityWindow : Window
 
             if (result.Success)
             {
-                MessageBox.Show("Тип задачиуспешно добавлен");
+                MessageBox.Show("Приоритет задачи успешно добавлен");
                 PriorityService priorityService = new PriorityService(new HttpClientFactory());
                 PriorityListWindow window = new PriorityListWindow();
                 window.InjectTaskTypeService(priorityService);
@@ -48,7 +48,7 @@ public partial class CreatePriorityWindow : Window
         }
         else
         {
-            MessageBox.Show("Введите название для типа задачи");
+            MessageBox.Show("Введите название для приоритета задачи");
         }
     }
 

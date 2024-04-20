@@ -5,7 +5,7 @@ using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
 
 namespace TaskNinjaHub.Desktop.Services.HttpClientServices;
 
-public class InformationSystemService(IHttpClientFactory httpClientFactory) : BaseService<Priority>(httpClientFactory)
+public class InformationSystemService(IHttpClientFactory httpClientFactory) : BaseService<InformationSystem>(httpClientFactory)
 {
 #if (DEBUG)
 

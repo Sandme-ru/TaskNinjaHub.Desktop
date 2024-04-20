@@ -4,71 +4,69 @@ using TaskNinjaHub.Desktop.Services.HttpClientServices;
 using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
 using TaskNinjaHub.Desktop.Utils.Storages;
 using TaskNinjaHub.Desktop.Windows.Priorities.List;
-using TaskNinjaHub.Desktop.Windows.Types.List;
 
-namespace TaskNinjaHub.Desktop.Windows.Priorities.Update
+namespace TaskNinjaHub.Desktop.Windows.Priorities.Update;
+
+/// <summary>
+/// Логика взаимодействия для UpdatePriorityWindow.xaml
+/// </summary>
+public partial class UpdatePriorityWindow : Window
 {
-    /// <summary>
-    /// Логика взаимодействия для UpdatePriorityWindow.xaml
-    /// </summary>
-    public partial class UpdatePriorityWindow : Window
+    private PriorityService _priorityService;
+
+    private Priority _priority;
+
+    public UpdatePriorityWindow()
     {
-        private PriorityService _priorityService;
+        InitializeComponent();
+        _priority = PriorityListWindow.Priority;
+        NameBox.Text = _priority.Name;
+        NameTextBlock.Text = PropertyStorage.Username;
+    }
+    public void InjectTaskTypeService(PriorityService priorityService)
+    {
+        _priorityService = priorityService;
+    }
 
-        private Priority _priority;
+    private async void CreateButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (NameBox.Text.Length > 0)
+        {
+            _priority.Name = NameBox.Text;
 
-        public UpdatePriorityWindow()
-        {
-            InitializeComponent();
-            _priority = PriorityListWindow.Priority;
-            NameBox.Text = _priority.Name;
-            NameTextBlock.Text = PropertyStorage.Username;
-        }
-        public void InjectTaskTypeService(PriorityService priorityService)
-        {
-            _priorityService = priorityService;
-        }
+            var result = await _priorityService.UpdateAsync(_priority);
 
-        private async void CreateButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (NameBox.Text.Length > 0)
+            if (result.Success)
             {
-                _priority.Name = NameBox.Text;
-
-                var result = await _priorityService.UpdateAsync(_priority);
-
-                if (result.Success)
-                {
-                    MessageBox.Show("Тип задачи успешно обновлен");
-                    PriorityService priorityService = new PriorityService(new HttpClientFactory());
-                    PriorityListWindow window = new PriorityListWindow();
-                    window.InjectTaskTypeService(priorityService);
-                    window.Show();
-                    this.Hide();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Введите название для типа задачи");
+                MessageBox.Show("Приоритет задачи успешно обновлен");
+                PriorityService priorityService = new PriorityService(new HttpClientFactory());
+                PriorityListWindow window = new PriorityListWindow();
+                window.InjectTaskTypeService(priorityService);
+                window.Show();
+                this.Hide();
             }
         }
-
-        private void backButton_Click(object sender, RoutedEventArgs e)
+        else
         {
-            PriorityService priorityService = new PriorityService(new HttpClientFactory());
-            PriorityListWindow window = new PriorityListWindow();
-            window.InjectTaskTypeService(priorityService);
-            window.Show();
-            this.Hide();
+            MessageBox.Show("Введите название для приоритета задачи");
         }
+    }
 
-        private void CancleButton_Click(object sender, RoutedEventArgs e)
-        {
-            PriorityService priorityService = new PriorityService(new HttpClientFactory());
-            PriorityListWindow window = new PriorityListWindow();
-            window.InjectTaskTypeService(priorityService);
-            window.Show();
-            this.Hide();
-        }
+    private void backButton_Click(object sender, RoutedEventArgs e)
+    {
+        PriorityService priorityService = new PriorityService(new HttpClientFactory());
+        PriorityListWindow window = new PriorityListWindow();
+        window.InjectTaskTypeService(priorityService);
+        window.Show();
+        this.Hide();
+    }
+
+    private void CancleButton_Click(object sender, RoutedEventArgs e)
+    {
+        PriorityService priorityService = new PriorityService(new HttpClientFactory());
+        PriorityListWindow window = new PriorityListWindow();
+        window.InjectTaskTypeService(priorityService);
+        window.Show();
+        this.Hide();
     }
 }

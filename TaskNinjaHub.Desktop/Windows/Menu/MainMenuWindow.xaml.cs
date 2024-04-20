@@ -39,7 +39,9 @@ namespace TaskNinjaHub.Desktop.Windows.Menu
 
         private void informationSystemsButton_Click(object sender, RoutedEventArgs e)
         {
-            InformationSystemListWindow informationSystemListWindow = new();
+            InformationSystemService informationSystemService = new InformationSystemService(new HttpClientFactory());
+            InformationSystemListWindow informationSystemListWindow = new InformationSystemListWindow();
+            informationSystemListWindow.InjectTaskTypeService(informationSystemService);
             this.Hide();
             informationSystemListWindow.Show();
         }
