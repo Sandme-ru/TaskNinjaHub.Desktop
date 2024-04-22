@@ -7,7 +7,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x86</Platforms>
+    <ApplicationIcon>Resources\HubLogoPNG.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\HubLogoPNG.ico" />
+    <None Remove="Resources\HubLogoPNG.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\HubLogoPNG.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CefSharp.Wpf.NETCore" Version="120.1.110" />
@@ -22,6 +32,26 @@
     <Reference Include="TaskNinjaHub.Application">
       <HintPath>..\..\TaskNinjaHub\TaskNinjaHub.Application\bin\Debug\net8.0\TaskNinjaHub.Application.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\HubLogoPNG.ico" />
+    <Resource Include="Resources\HubLogoPNG.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pictures.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Pictures.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pictures.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Pictures.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

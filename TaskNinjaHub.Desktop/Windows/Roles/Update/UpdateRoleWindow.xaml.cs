@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using TaskNinjaHub.Desktop.Models.Priorities;
+using TaskNinjaHub.Desktop.Models.User;
+using TaskNinjaHub.Desktop.Services.HttpClientServices;
+using TaskNinjaHub.Desktop.Services.UserServices.Roles;
+using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
+using TaskNinjaHub.Desktop.Utils.Storages;
+using TaskNinjaHub.Desktop.Windows.Priorities.List;
+using TaskNinjaHub.Desktop.Windows.Roles.List;
 
 namespace TaskNinjaHub.Desktop.Windows.Roles.Update
 {
@@ -19,9 +15,62 @@ namespace TaskNinjaHub.Desktop.Windows.Roles.Update
     /// </summary>
     public partial class UpdateRoleWindow : Window
     {
+        private RoleService _roleService;
+
+        private Role _role;
+
         public UpdateRoleWindow()
         {
             InitializeComponent();
+            _role = RoleListWindow.Role;
+            NameBox.Text = _role.Name;
+            NameTextBlock.Text = PropertyStorage.Username;
+        }
+        public void InjectTaskTypeService(RoleService roleService)
+        {
+            _roleService = roleService;
+        }
+
+        private async void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (NameBox.Text.Length > 0)
+            {
+                _role.Name = NameBox.Text;
+
+                var result = await _roleService.EditRoleAsync(_role.Id.ToString(), _role.Name);
+
+                if (result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Роль успешно обновлена");
+                    RoleService roleService = new RoleService(new HttpClientFactory());
+                    RoleListWindow window = new RoleListWindow();
+                    window.InjectTaskTypeService(roleService);
+                    window.Show();
+                    this.Hide();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите название для роли");
+            }
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            RoleService roleService = new RoleService(new HttpClientFactory());
+            RoleListWindow window = new RoleListWindow();
+            window.InjectTaskTypeService(roleService);
+            window.Show();
+            this.Hide();
+        }
+
+        private void CancleButton_Click(object sender, RoutedEventArgs e)
+        {
+            RoleService roleService = new RoleService(new HttpClientFactory());
+            RoleListWindow window = new RoleListWindow();
+            window.InjectTaskTypeService(roleService);
+            window.Show();
+            this.Hide();
         }
     }
 }
