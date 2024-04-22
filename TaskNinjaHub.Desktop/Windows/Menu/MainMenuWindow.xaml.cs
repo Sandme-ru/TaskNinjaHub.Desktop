@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using TaskNinjaHub.Desktop.Services.HttpClientServices;
+using TaskNinjaHub.Desktop.Services.UserServices.Roles;
 using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
 using TaskNinjaHub.Desktop.Utils.Storages;
 using TaskNinjaHub.Desktop.Windows.InformationSystems.List;
@@ -33,6 +34,8 @@ namespace TaskNinjaHub.Desktop.Windows.Menu
         private void rolesButton_Click(object sender, RoutedEventArgs e)
         {
             RoleListWindow roleListWindow = new();
+            RoleService roleService = new RoleService(new HttpClientFactory());
+            roleListWindow.InjectTaskTypeService(roleService);
             this.Hide();
             roleListWindow.Show();
         }

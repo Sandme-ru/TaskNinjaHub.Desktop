@@ -75,7 +75,6 @@ public partial class PriorityListWindow : Window
         PriorityService priorityService = new PriorityService(new HttpClientFactory());
         createPriorityWindow.InjectTaskTypeService(priorityService);
         this.Hide();
-        createPriorityWindow.Show();
     }
 
     private void backButton_Click(object sender, RoutedEventArgs e)

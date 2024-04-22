@@ -27,6 +27,5 @@
         <Button Grid.Column="0" Name="CreateButton" Content="Создать" Grid.Row="2" Margin="10" Background="#FF1890FF" BorderBrush="#FF1890FF" Foreground="White" FontSize="14" FontWeight="Bold"/>
         <Button Grid.Column="1" Name="UpdateButton" Content="Обновить" Grid.Row="2" Margin="10" Background="White" BorderBrush="#FF1890FF" FontSize="14" FontWeight="Bold"/>
         <Button Grid.Column="2" Name="DeleteButton" Content="Удалить" Grid.Row="2" Margin="10" FontSize="12" FontWeight="Bold" Background="#FFF93939" BorderBrush="#FFF93939" Foreground="White"/>
-
     </Grid>
 </Window>
