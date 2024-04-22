@@ -4,28 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskNinjaHub.Desktop.Windows.Users.List"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="UserListWindow" Height="450" Width="800">
+                Title="Список пользователей" Height="450" Width="800" MinHeight="400" MinWidth="700" Loaded="Window_Loaded_1">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="221*"/>
+            <ColumnDefinition Width="267*"/>
+            <ColumnDefinition Width="267*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="281*"/>
+            <RowDefinition Height="65*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="NameTextBlock" Grid.Column="2" TextWrapping="Wrap" Text="" Margin="0, 7, 0, 0" FontSize="18"/>
-        <DataGrid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Name="UsersDataGrid" AutoGenerateColumns="False" Background="White" BorderBrush="#FF1890FF">
+        <TextBlock x:Name="NameTextBlock" Grid.Column="3" TextWrapping="Wrap" Text="" FontSize="18" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DataGrid Grid.Column="2" Name="InformationSystemDataGrid" AutoGenerateColumns="False" Background="White" SelectionChanged="TypesDataGrid_SelectionChanged" BorderBrush="#FF1890FF" Grid.Row="1" Grid.RowSpan="3">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Имя " Binding="{Binding NameId}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Имя " Binding="{Binding Email}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="0" Name="CreateButton" Content="Создать" Grid.Row="2" Margin="10" Background="#FF1890FF" BorderBrush="#FF1890FF" Foreground="White" FontSize="14" FontWeight="Bold"/>
-        <Button Grid.Column="1" Name="UpdateButton" Content="Обновить" Grid.Row="2" Margin="10" Background="White" BorderBrush="#FF1890FF" FontSize="14" FontWeight="Bold"/>
-        <Button Grid.Column="2" Name="DeleteButton" Content="Удалить" Grid.Row="2" Margin="10" FontSize="12" FontWeight="Bold" Background="#FFF93939" BorderBrush="#FFF93939" Foreground="White"/>
+        <Button Grid.Column="0" Name="CreateButton" Content="Создать" Grid.Row="3" Margin="10,10,10,10" Background="#FF1890FF" BorderBrush="#FF1890FF" Foreground="White" FontSize="14" FontWeight="Bold" Click="CreateButton_Click" Grid.ColumnSpan="2"/>
+        <Button Grid.Column="2" Name="UpdateButton" Content="Обновить" Grid.Row="3" Margin="10,10,10,10" Background="White" BorderBrush="#FF1890FF" FontSize="14" FontWeight="Bold" Click="UpdateButton_Click"/>
+        <Button Grid.Column="3" Name="DeleteButton" Content="Удалить" Grid.Row="3" Margin="10,10,10,10" FontSize="12" FontWeight="Bold" Background="#FFF93939" BorderBrush="#FFF93939" Foreground="White" Click="DeleteButton_Click"/>
+        <Button fa:Awesome.Content="ArrowLeft" Background="White" BorderBrush="#FFFFFDFD" Name="backButton" Click="backButton_Click" Grid.Row="1"/>
+        <Image Grid.ColumnSpan="2" Source="/Resources/HubLogoPNG.png"/>
+        <Label Grid.Column="2" Grid.ColumnSpan="1" Content="Список пользователей" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Border BorderBrush="#FF1890FF" BorderThickness="0, 0, 0, 1" Grid.ColumnSpan="6"/>
     </Grid>
 </Window>

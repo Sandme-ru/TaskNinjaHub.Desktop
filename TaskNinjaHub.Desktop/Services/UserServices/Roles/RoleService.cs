@@ -10,16 +10,6 @@ public class RoleService(IHttpClientFactory httpClientFactory)
 {
     private readonly HttpClient _httpClient = httpClientFactory.CreateAuthClient();
 
-#if (DEBUG)
-
-    protected virtual string BasePath => "/Admin";
-
-#elif (RELEASE)
-    
-    protected virtual string BasePath => $"task-api/api/{nameof(TEntity).ToLower()}";
-
-#endif
-
     public async Task<IEnumerable<Role>> GetAllAsync()
     {
         var result = await _httpClient.GetFromJsonAsync<IEnumerable<Role>>("Admin/GetRoles")!;
