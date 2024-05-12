@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskNinjaHub.Desktop.Windows.Users.Create"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-            Title="Создание пользователя" Height="450" Width="800" MinHeight="450" MinWidth="700">
+            Title="Создание пользователя" Height="450" Width="800" MinHeight="450" MinWidth="700" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="43*"/>
@@ -18,19 +18,38 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="43*"/>
             <RowDefinition Height="45*"/>
-            <RowDefinition Height="38*"/>
-            <RowDefinition Height="178*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="27*"/>
             <RowDefinition Height="65*"/>
             <RowDefinition Height="65*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="NameTextBlock" Grid.Column="4" TextWrapping="Wrap" Text="" Margin="1,7,0,0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Grid.Column="2" Grid.ColumnSpan="2" Name="CreateButton" Content="Создать" Grid.Row="4" Margin="10,10,10,10" Background="#FF1890FF" BorderBrush="#FF1890FF" Foreground="White" FontSize="14" FontWeight="Bold" Click="CreateButton_Click"/>
-        <Button Grid.Column="2" Name="UpdateButton" Content="Отменить" Grid.Row="5" Margin="10,10,10,10" Background="#FFF9F9F9" BorderBrush="#FFF93939" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" Click="UpdateButton_Click"/>
-        <TextBlock Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" Text="Название" Grid.ColumnSpan="2" Margin="0,38,195,0" Grid.RowSpan="2"/>
-        <TextBox Grid.Column="3" Grid.Row="2" TextWrapping="Wrap" Name="NameBox" Text="" VerticalAlignment="Top" Height="18" Margin="0,38,0,0" Grid.RowSpan="2" />
-        <Button fa:Awesome.Content="ArrowLeft" Background="White" BorderBrush="#FFFFFDFD" Name="backButton" Click="backButton_Click" Grid.Row="1"/>
-        <Image Grid.ColumnSpan="2" Source="/Resources/HubLogoPNG.png"/>
-        <Label Grid.Column="2" Grid.ColumnSpan="2" Content="Создание ИС" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Border BorderBrush="#FF1890FF" BorderThickness="0, 0, 0, 1" Grid.ColumnSpan="6"/>
+        <TextBlock x:Name="NameTextBlock" Grid.Column="4" TextWrapping="Wrap" Text="" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Grid.Column="2" Grid.ColumnSpan="2" Name="CreateButton" Content="Создать" Grid.Row="9" Margin="10,10,10,10" Background="#FF1890FF" BorderBrush="#FF1890FF" Foreground="White" FontSize="14" FontWeight="Bold" Click="CreateButton_Click"/>
+        <Button Grid.Column="2" Name="UpdateButton" Content="Отменить" Grid.Row="10" Margin="10,10,10,10" Background="#FFF9F9F9" BorderBrush="#FFF93939" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" Click="UpdateButton_Click"/>
+        
+        <TextBlock Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" Text="Почта" Grid.ColumnSpan="1"/>
+        <TextBox Grid.Column="3" Grid.Row="2" TextWrapping="Wrap" Name="EmailBox" Text="" VerticalAlignment="Top" Height="18" Grid.RowSpan="2" />
+        <TextBlock Grid.Column="2" Grid.Row="3" TextWrapping="Wrap" Text="Пароль" Grid.ColumnSpan="1"/>
+        <TextBox Grid.Column="3" Grid.Row="3" TextWrapping="Wrap" Name="PasswordBox" Text="" VerticalAlignment="Top" Height="18" Grid.RowSpan="2" />
+        <TextBlock Grid.Column="2" Grid.Row="4" TextWrapping="Wrap" Text="Фамилия" Grid.ColumnSpan="1"/>
+        <TextBox Grid.Column="3" Grid.Row="4" TextWrapping="Wrap" Name="SurnameBox" Text="" VerticalAlignment="Top" Height="18" Grid.RowSpan="2" />
+        <TextBlock Grid.Column="2" Grid.Row="5" TextWrapping="Wrap" Text="Имя" Grid.ColumnSpan="1"/>
+        <TextBox Grid.Column="3" Grid.Row="5" TextWrapping="Wrap" Name="NameBox" Text="" VerticalAlignment="Top" Height="18" Grid.RowSpan="2" />
+        <TextBlock Grid.Column="2" Grid.Row="6" TextWrapping="Wrap" Text="Отчество" Grid.ColumnSpan="1"/>
+        <TextBox Grid.Column="3" Grid.Row="6" TextWrapping="Wrap" Name="MiddleBox" Text="" VerticalAlignment="Top" Height="18" Grid.RowSpan="2" />
+        <TextBlock Grid.Column="2" Grid.Row="7" TextWrapping="Wrap" Text="Номер" Grid.ColumnSpan="1"/>
+        <TextBox Grid.Column="3" Grid.Row="7" TextWrapping="Wrap" Name="PhoneBox" Text="" VerticalAlignment="Top" Height="18" Grid.RowSpan="2" />
+        <TextBlock Grid.Column="2" Grid.Row="8" TextWrapping="Wrap" Text="Роль" Grid.ColumnSpan="1"/>
+        <ComboBox Grid.Column="3" Grid.Row="8"  Name="RoleComboBox" Text="" VerticalAlignment="Top" Height="18" Grid.RowSpan="2" />
+        
+        <Button fa:Awesome.Content="ArrowLeft" Background="White" BorderBrush="#FFFFFDFD" Name="backButton" Click="backButton_Click" Grid.Column="0" Grid.Row="1"/>
+        <Image Grid.ColumnSpan="3" Source="/Resources/HubLogoPNG.png" />
+        <Label Grid.Column="2" Grid.ColumnSpan="2" Content="Создание пользователя" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Border BorderBrush="#FF1890FF" BorderThickness="0, 0, 0, 1" Grid.ColumnSpan="5"/>
     </Grid>
 </Window>

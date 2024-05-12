@@ -2,12 +2,14 @@
 using System.Windows.Controls;
 using TaskNinjaHub.Desktop.Models.User;
 using TaskNinjaHub.Desktop.Services.HttpClientServices;
+using TaskNinjaHub.Desktop.Services.UserServices.Roles;
 using TaskNinjaHub.Desktop.Services.UserServices.Users;
 using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
 using TaskNinjaHub.Desktop.Utils.Storages;
 using TaskNinjaHub.Desktop.Windows.InformationSystems.Create;
 using TaskNinjaHub.Desktop.Windows.InformationSystems.Update;
 using TaskNinjaHub.Desktop.Windows.Menu;
+using TaskNinjaHub.Desktop.Windows.Users.Create;
 
 namespace TaskNinjaHub.Desktop.Windows.Users.List
 {
@@ -71,11 +73,12 @@ namespace TaskNinjaHub.Desktop.Windows.Users.List
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            CreateInformationSystemWindow createInformationSystemWindow = new CreateInformationSystemWindow();
-            InformationSystemService informationSystemService = new InformationSystemService(new HttpClientFactory());
-            createInformationSystemWindow.InjectTaskTypeService(informationSystemService);
+            CreateUserWindow createUserWindow = new();
+            UserService userService = new UserService(new HttpClientFactory());
+            RoleService roleService = new RoleService(new HttpClientFactory());
+            createUserWindow.InjectTaskTypeService(userService, roleService);
             this.Hide();
-            createInformationSystemWindow.Show();
+            createUserWindow.Show();
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
