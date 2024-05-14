@@ -57,13 +57,13 @@ public class UserDto
     /// Gets or sets a flag indicating if a user has confirmed their telephone address.
     /// </summary>
     /// <value>True if the telephone number has been confirmed, otherwise false.</value>
-    public virtual bool PhoneNumberConfirmed { get; set; }
+    public virtual bool? PhoneNumberConfirmed { get; set; }
 
     /// <summary>
     /// Gets or sets a flag indicating if two factor authentication is enabled for this user.
     /// </summary>
     /// <value>True if 2fa is enabled, otherwise false.</value>
-    public virtual bool TwoFactorEnabled { get; set; }
+    public virtual bool? TwoFactorEnabled { get; set; }
 
     /// <summary>
     /// Gets or sets the date and time, in UTC, when any user lockout ends.
@@ -77,28 +77,28 @@ public class UserDto
     /// Gets or sets a flag indicating if the user could be locked out.
     /// </summary>
     /// <value>True if the user could be locked out, otherwise false.</value>
-    public virtual bool LockoutEnabled { get; set; }
+    public virtual bool? LockoutEnabled { get; set; }
 
     /// <summary>
     /// Gets or sets the number of failed login attempts for the current user.
     /// </summary>
-    public virtual int AccessFailedCount { get; set; }
+    public virtual int? AccessFailedCount { get; set; }
     public string? FirstName { get; set; }
 
     public string? LastName { get; set; }
 
     public string? MiddleName { get; set; }
 
-    public string Password { get; set; }
+    public string? Password { get; set; }
 
-    public string Role { get; set; }
+    public string? Role { get; set; }
 
-    public string ShortName => LastName + (string.IsNullOrWhiteSpace(FirstName) ? "" : " " + FirstName[0] + "." + (string.IsNullOrWhiteSpace(MiddleName) ? "" : MiddleName[0] + "."));
+    public string? ShortName => LastName + (string.IsNullOrWhiteSpace(FirstName) ? "" : " " + FirstName[0] + "." + (string.IsNullOrWhiteSpace(MiddleName) ? "" : MiddleName[0] + "."));
 
     [DefaultValue(true)]
-    public bool IsActive { get; set; } = true;
-    public DateTimeOffset CreateDate { get; set; }
-    public DateTimeOffset LastLoginDate { get; set; }
+    public bool? IsActive { get; set; } = true;
+    public DateTimeOffset? CreateDate { get; set; }
+    public DateTimeOffset? LastLoginDate { get; set; }
 
-    public LocalizationType LocalizationType { get; set; }
+    public LocalizationType? LocalizationType { get; set; }
 }

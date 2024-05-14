@@ -21,9 +21,9 @@ public class UserService(IHttpClientFactory httpClientFactory)
         return result;
     }
 
-    public async Task<HttpResponseMessage> EditUserAsync(AuthorDto user)
+    public async Task<HttpResponseMessage> EditUserAsync(UserDto user)
     {
-        var result = await _httpClient.PutAsJsonAsync($"Admin/EditUser", user);
+        var result = await _httpClient.PostAsJsonAsync($"Admin/EditUserInfo", user);
         return result;
     }
 

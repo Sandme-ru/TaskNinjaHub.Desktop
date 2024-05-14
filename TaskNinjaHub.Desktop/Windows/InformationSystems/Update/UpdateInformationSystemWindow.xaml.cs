@@ -3,9 +3,7 @@ using TaskNinjaHub.Desktop.Models.InformationSystems;
 using TaskNinjaHub.Desktop.Services.HttpClientServices;
 using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
 using TaskNinjaHub.Desktop.Utils.Storages;
-using TaskNinjaHub.Desktop.Windows.InformationSystems.Create;
 using TaskNinjaHub.Desktop.Windows.InformationSystems.List;
-using TaskNinjaHub.Desktop.Windows.Priorities.List;
 
 namespace TaskNinjaHub.Desktop.Windows.InformationSystems.Update;
 
