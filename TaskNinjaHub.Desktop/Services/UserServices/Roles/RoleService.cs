@@ -33,4 +33,11 @@ public class RoleService(IHttpClientFactory httpClientFactory)
         var result = await _httpClient.DeleteAsync($"Admin/DeleteRole?roleId={roleId}");
         return result;
     }
+    public async Task<string> GetUserRoleAsync(string userId)
+    {
+        var response = await _httpClient.GetFromJsonAsync<IList<string>>($"Admin/GetUserRole?userId={userId}");
+        var result = response.FirstOrDefault();
+
+        return result;
+    }
 }

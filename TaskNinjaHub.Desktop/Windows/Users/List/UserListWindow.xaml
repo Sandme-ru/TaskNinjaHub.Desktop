@@ -29,7 +29,7 @@
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Имя " Binding="{Binding FirstName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Роль" Binding="{Binding Role}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Активность" Binding="{Binding IsActive}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Grid.Column="0" Name="CreateButton" Content="Создать" Grid.Row="3" Margin="10,10,10,10" Background="#FF1890FF" BorderBrush="#FF1890FF" Foreground="White" FontSize="14" FontWeight="Bold" Click="CreateButton_Click" Grid.ColumnSpan="2"/>

@@ -10,6 +10,7 @@ using TaskNinjaHub.Desktop.Windows.InformationSystems.Create;
 using TaskNinjaHub.Desktop.Windows.InformationSystems.Update;
 using TaskNinjaHub.Desktop.Windows.Menu;
 using TaskNinjaHub.Desktop.Windows.Users.Create;
+using TaskNinjaHub.Desktop.Windows.Users.Update;
 
 namespace TaskNinjaHub.Desktop.Windows.Users.List
 {
@@ -106,11 +107,12 @@ namespace TaskNinjaHub.Desktop.Windows.Users.List
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateInformationSystemWindow updateInformationSystemWindow = new UpdateInformationSystemWindow();
-            InformationSystemService informationSystemService = new InformationSystemService(new HttpClientFactory());
-            updateInformationSystemWindow.InjectTaskTypeService(informationSystemService);
+            UpdateUserWindow updateUserWindow = new();
+            UserService userService = new UserService(new HttpClientFactory());
+            RoleService roleService = new RoleService(new HttpClientFactory());
+            updateUserWindow.InjectTaskTypeService(userService, roleService);
             this.Hide();
-            updateInformationSystemWindow.Show();
+            updateUserWindow.Show();
         }
     }
 }
