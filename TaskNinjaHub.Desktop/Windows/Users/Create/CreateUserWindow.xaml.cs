@@ -80,7 +80,7 @@ public partial class CreateUserWindow : Window
                 }
                 else
                 {
-                    errorMessage = $"Ошибка: {result.StatusCode} - {result.ReasonPhrase}";
+                    errorMessage = $"{result.StatusCode} - {result.ReasonPhrase}";
                 }
 
                 MessageBox.Show($"Ошибка: {errorMessage}");

@@ -49,7 +49,7 @@ namespace TaskNinjaHub.Desktop.Windows.Roles.Create
                     }
                     else
                     {
-                        errorMessage = $"Ошибка: {result.StatusCode} - {result.ReasonPhrase}";
+                        errorMessage = $"{result.StatusCode} - {result.ReasonPhrase}";
                     }
 
                     MessageBox.Show($"Ошибка: {errorMessage}");

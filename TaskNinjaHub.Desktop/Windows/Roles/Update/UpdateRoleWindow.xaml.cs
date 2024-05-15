@@ -67,7 +67,7 @@ namespace TaskNinjaHub.Desktop.Windows.Roles.Update
                     }
                     else
                     {
-                        errorMessage = $"Ошибка: {result.StatusCode} - {result.ReasonPhrase}";
+                        errorMessage = $"{result.StatusCode} - {result.ReasonPhrase}";
                     }
 
                     MessageBox.Show($"Ошибка: {errorMessage}");

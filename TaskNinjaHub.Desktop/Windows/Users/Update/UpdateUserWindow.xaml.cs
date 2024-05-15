@@ -102,7 +102,7 @@ namespace TaskNinjaHub.Desktop.Windows.Users.Update
                     }
                     else
                     {
-                        errorMessage = $"Ошибка: {result.StatusCode} - {result.ReasonPhrase}";
+                        errorMessage = $"{result.StatusCode} - {result.ReasonPhrase}";
                     }
 
                     MessageBox.Show($"Ошибка: {errorMessage}");
