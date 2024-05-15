@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskNinjaHub.Desktop.Windows.Roles.List"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="RoleListWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Список ролей" MinHeight="450" MinWidth="700" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="46*"/>

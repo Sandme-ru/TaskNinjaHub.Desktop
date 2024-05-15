@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskNinjaHub.Desktop.Windows.Roles.Update"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="UpdateRoleWindow" Height="450" Width="800">
+        Title="Обновление роли" MinHeight="450" MinWidth="700" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="43*"/>
