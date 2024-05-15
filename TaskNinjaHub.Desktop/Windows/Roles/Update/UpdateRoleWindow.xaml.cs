@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Net;
+using System.Windows;
 using TaskNinjaHub.Desktop.Models.Priorities;
 using TaskNinjaHub.Desktop.Models.User;
 using TaskNinjaHub.Desktop.Services.HttpClientServices;
@@ -35,6 +36,13 @@ namespace TaskNinjaHub.Desktop.Windows.Roles.Update
         {
             if (NameBox.Text.Length > 0)
             {
+                var exisiRoles = await _roleService.GetAllAsync();
+                if (exisiRoles.Any(x => x.Name == NameBox.Text))
+                {
+                    MessageBox.Show("Такая роль уже существует");
+                    return;
+                }
+
                 _role.Name = NameBox.Text;
 
                 var result = await _roleService.EditRoleAsync(_role.Id.ToString(), _role.Name);
@@ -47,6 +55,22 @@ namespace TaskNinjaHub.Desktop.Windows.Roles.Update
                     window.InjectTaskTypeService(roleService);
                     window.Show();
                     this.Hide();
+                }
+                else
+                {
+                    string errorMessage;
+
+                    if (result.StatusCode == HttpStatusCode.BadRequest)
+                    {
+                        errorMessage = await result.Content
+                            .ReadAsStringAsync();
+                    }
+                    else
+                    {
+                        errorMessage = $"Ошибка: {result.StatusCode} - {result.ReasonPhrase}";
+                    }
+
+                    MessageBox.Show($"Ошибка: {errorMessage}");
                 }
             }
             else

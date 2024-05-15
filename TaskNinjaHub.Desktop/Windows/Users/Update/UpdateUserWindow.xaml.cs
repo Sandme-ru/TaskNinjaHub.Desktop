@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Net;
+using System.Windows;
 using TaskNinjaHub.Desktop.Models.User;
 using TaskNinjaHub.Desktop.Services.UserServices.Roles;
 using TaskNinjaHub.Desktop.Services.UserServices.Users;
@@ -69,10 +70,16 @@ namespace TaskNinjaHub.Desktop.Windows.Users.Update
                     Role = RoleComboBox.SelectedItem.ToString(),
                 };
 
-                if (PasswordBox.IsEnabled && PasswordBox.Text.Length > 0)
+                var exisiRoles = await _userService.GetAllAsync();
+                if (exisiRoles.Any(x => x.UserName == NameBox.Text))
+                {
+                    MessageBox.Show("Такой пользователь уже существует");
+                    return;
+                }
+
+                if (PasswordBox.IsEnabled = true && PasswordBox.Text.Length > 0)
                     userDto.Password = PasswordBox.Text;
-                else
-                    MessageBox.Show("Заполните поле пароял");
+
                 var result = await _userService.EditUserAsync(userDto);
 
                 if (result.IsSuccessStatusCode)
@@ -85,7 +92,21 @@ namespace TaskNinjaHub.Desktop.Windows.Users.Update
                     roleListWindow.Show();
                 }
                 else
-                    MessageBox.Show($"Ошибка: {result.RequestMessage}");
+                {
+                    string errorMessage;
+
+                    if (result.StatusCode == HttpStatusCode.BadRequest)
+                    {
+                        errorMessage = await result.Content
+                            .ReadAsStringAsync();
+                    }
+                    else
+                    {
+                        errorMessage = $"Ошибка: {result.StatusCode} - {result.ReasonPhrase}";
+                    }
+
+                    MessageBox.Show($"Ошибка: {errorMessage}");
+                }
             }
             else
             {

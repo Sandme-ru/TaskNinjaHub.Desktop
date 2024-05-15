@@ -22,7 +22,7 @@
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="NameTextBlock" Grid.Column="3" TextWrapping="Wrap" Text="" Margin="266,7,0,0" FontSize="18" Grid.ColumnSpan="3"/>
-        <DataGrid Grid.Column="2" Grid.ColumnSpan="3" Name="PriorityDataGrid" AutoGenerateColumns="False" Background="White" SelectionChanged="TypesDataGrid_SelectionChanged" BorderBrush="#FF1890FF" Margin="0,43,0,65" Grid.RowSpan="3">
+        <DataGrid IsReadOnly="true" Grid.Column="2" Grid.ColumnSpan="3" Name="PriorityDataGrid" AutoGenerateColumns="False" Background="White" SelectionChanged="TypesDataGrid_SelectionChanged" BorderBrush="#FF1890FF" Margin="0,43,0,65" Grid.RowSpan="3">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Имя " Binding="{Binding Name}"></DataGridTextColumn>
