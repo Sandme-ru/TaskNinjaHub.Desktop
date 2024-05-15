@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskNinjaHub.Desktop.Windows.Types.Update"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="UpdateTypeWindow" Height="450" Width="800">
+        Title="Обновить тип задачи" MinHeight="450" MinWidth="700" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="43*"/>

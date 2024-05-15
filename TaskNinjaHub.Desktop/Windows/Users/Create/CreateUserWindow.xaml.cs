@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Net;
+using System.Windows;
 using TaskNinjaHub.Desktop.Models.User;
 using TaskNinjaHub.Desktop.Services.UserServices.Roles;
 using TaskNinjaHub.Desktop.Services.UserServices.Users;
@@ -44,7 +45,7 @@ public partial class CreateUserWindow : Window
 
     private async void CreateButton_Click(object sender, RoutedEventArgs e)
     {
-        if (NameBox.Text.Length > 0)
+        if (EmailBox.Text.Length > 0 && SurnameBox.Text.Length > 0 && NameBox.Text.Length > 0 && MiddleBox.Text.Length > 0 && PhoneBox.Text.Length > 0 && RoleComboBox.Text.Length > 0)
         {
             UserDto userDto = new UserDto()
             {
@@ -59,7 +60,6 @@ public partial class CreateUserWindow : Window
             };
 
             var result = await _userService.AddUserAsync(userDto);
-
             if (result.IsSuccessStatusCode)
             {
                 MessageBox.Show("Пользователь успешно добавлен");
@@ -68,6 +68,22 @@ public partial class CreateUserWindow : Window
                 roleListWindow.InjectTaskTypeService(userService);
                 this.Hide();
                 roleListWindow.Show();
+            }
+            else
+            {
+                string errorMessage;
+
+                if (result.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    errorMessage = await result.Content
+                        .ReadAsStringAsync();
+                }
+                else
+                {
+                    errorMessage = $"{result.StatusCode} - {result.ReasonPhrase}";
+                }
+
+                MessageBox.Show($"Ошибка: {errorMessage}");
             }
         }
         else

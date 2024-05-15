@@ -11,26 +11,55 @@ public class UserService(IHttpClientFactory httpClientFactory)
 
     public async Task<IEnumerable<ApplicationUser>> GetAllAsync()
     {
-        var result = await _httpClient.GetFromJsonAsync<IEnumerable<ApplicationUser>>("Admin/GetUsers")!;
-        return result!;
+        try 
+        {
+            var result = await _httpClient.GetFromJsonAsync<IEnumerable<ApplicationUser>>("Admin/GetUsers")!;
+            return result!;
+        }
+        catch
+        {
+            return new List<ApplicationUser>();
+        }
     }
 
     public async Task<HttpResponseMessage> AddUserAsync(UserDto user)
     {
-        var result = await _httpClient.PostAsJsonAsync($"Admin/AddUser", user);
-        return result;
+        try
+        {
+            var result = await _httpClient.PostAsJsonAsync($"Admin/AddUser", user);
+            return result;
+        }
+        catch
+        {
+            return new HttpResponseMessage();
+        }
     }
 
     public async Task<HttpResponseMessage> EditUserAsync(UserDto user)
     {
-        var result = await _httpClient.PostAsJsonAsync($"Admin/EditUserInfo", user);
-        return result;
+
+        try
+        {
+            var result = await _httpClient.PostAsJsonAsync($"Admin/EditUserInfo", user);
+            return result;
+        }
+        catch
+        {
+            return new HttpResponseMessage();
+        }
     }
 
     public async Task<HttpResponseMessage> DeleteUserAsync(string userId)
     {
-        var result = await _httpClient.DeleteAsync($"Admin/DeleteUser?id={userId}");
-        return result;
+        try
+        {
+            var result = await _httpClient.DeleteAsync($"Admin/DeleteUser?id={userId}");
+            return result;
+        }
+        catch
+        {
+            return new HttpResponseMessage();
+        }
     }
 
 }

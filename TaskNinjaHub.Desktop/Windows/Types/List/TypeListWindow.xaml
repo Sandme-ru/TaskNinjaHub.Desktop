@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskNinjaHub.Desktop.Windows.Types.List"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="TypeListWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Список типов задач" MinHeight="450" MinWidth="700" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="46*"/>

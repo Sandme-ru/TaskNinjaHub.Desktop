@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Net;
+using System.Windows;
 using TaskNinjaHub.Desktop.Services.UserServices.Roles;
 using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
 using TaskNinjaHub.Desktop.Utils.Storages;
@@ -36,6 +37,22 @@ namespace TaskNinjaHub.Desktop.Windows.Roles.Create
                     window.InjectTaskTypeService(roleService);
                     window.Show();
                     this.Hide();
+                }
+                else
+                {
+                    string errorMessage;
+
+                    if (result.StatusCode == HttpStatusCode.BadRequest)
+                    {
+                        errorMessage = await result.Content
+                            .ReadAsStringAsync();
+                    }
+                    else
+                    {
+                        errorMessage = $"{result.StatusCode} - {result.ReasonPhrase}";
+                    }
+
+                    MessageBox.Show($"Ошибка: {errorMessage}");
                 }
             }
             else
