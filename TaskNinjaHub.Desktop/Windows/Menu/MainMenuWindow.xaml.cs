@@ -27,17 +27,17 @@ namespace TaskNinjaHub.Desktop.Windows.Menu
 
         private void usersButton_Click(object sender, RoutedEventArgs e)
         {
-            UserListWindow roleListWindow = new();
-            UserService userService = new UserService(new HttpClientFactory());
-            roleListWindow.InjectTaskTypeService(userService);
+            UserListWindow userListWindow = new();
+            var userService = new UserService(new HttpClientFactory());
+            userListWindow.InjectUserService(userService);
             this.Hide();
-            roleListWindow.Show();
+            userListWindow.Show();
         }
 
         private void rolesButton_Click(object sender, RoutedEventArgs e)
         {
             RoleListWindow roleListWindow = new();
-            RoleService roleService = new RoleService(new HttpClientFactory());
+            var roleService = new RoleService(new HttpClientFactory());
             roleListWindow.InjectTaskTypeService(roleService);
             this.Hide();
             roleListWindow.Show();
@@ -45,8 +45,8 @@ namespace TaskNinjaHub.Desktop.Windows.Menu
 
         private void informationSystemsButton_Click(object sender, RoutedEventArgs e)
         {
-            InformationSystemService informationSystemService = new InformationSystemService(new HttpClientFactory());
-            InformationSystemListWindow informationSystemListWindow = new InformationSystemListWindow();
+            var informationSystemService = new InformationSystemService(new HttpClientFactory());
+            var informationSystemListWindow = new InformationSystemListWindow();
             informationSystemListWindow.InjectTaskTypeService(informationSystemService);
             this.Hide();
             informationSystemListWindow.Show();
@@ -54,8 +54,8 @@ namespace TaskNinjaHub.Desktop.Windows.Menu
 
         private void typesButton_Click(object sender, RoutedEventArgs e)
         {
-            TaskTypeService taskTypeService = new TaskTypeService(new HttpClientFactory());
-            TypeListWindow window = new TypeListWindow();
+            var taskTypeService = new TaskTypeService(new HttpClientFactory());
+            var window = new TypeListWindow();
             window.InjectTaskTypeService(taskTypeService);
             window.Show();
             this.Hide();
@@ -63,9 +63,9 @@ namespace TaskNinjaHub.Desktop.Windows.Menu
 
         private void prioritiesButton_Click(object sender, RoutedEventArgs e)
         {
-            PriorityListWindow prioritiesListWindow = new PriorityListWindow();
-            PriorityService priorityService = new PriorityService(new HttpClientFactory());
-            prioritiesListWindow.InjectTaskTypeService(priorityService);
+            var prioritiesListWindow = new PriorityListWindow();
+            var priorityService = new PriorityService(new HttpClientFactory());
+            prioritiesListWindow.InjectPriorityService(priorityService);
             this.Hide();
             prioritiesListWindow.Show();
         }
