@@ -32,7 +32,7 @@ namespace TaskNinjaHub.Desktop.Windows.Types.List
             if (_taskTypeService != null)
             {
                 var typesList = await GetAllTypes();
-                TypesDataGrid.ItemsSource = typesList;
+                InformationSystemDataGrid.ItemsSource = typesList;
             }
             else
             {
@@ -57,9 +57,9 @@ namespace TaskNinjaHub.Desktop.Windows.Types.List
 
         private void TypesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (TypesDataGrid.SelectedItems.Count == 1)
+            if (InformationSystemDataGrid.SelectedItems.Count == 1)
             {
-                CatalogTaskType = (CatalogTaskType)TypesDataGrid.SelectedItem;
+                CatalogTaskType = (CatalogTaskType)InformationSystemDataGrid.SelectedItem;
                 UpdateButton.IsEnabled = true;
                 DeleteButton.IsEnabled = true;
             }
@@ -92,7 +92,7 @@ namespace TaskNinjaHub.Desktop.Windows.Types.List
             {
                 await _taskTypeService.DeleteAsync(CatalogTaskType.Id);
                 var typesList = await GetAllTypes();
-                TypesDataGrid.ItemsSource = typesList;
+                InformationSystemDataGrid.ItemsSource = typesList;
 
                 MessageBox.Show("Тип успешно удален");
             }

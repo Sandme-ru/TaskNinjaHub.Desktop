@@ -34,7 +34,7 @@ namespace TaskNinjaHub.Desktop.Windows.Roles.List
             if (_roleService != null!)
             {
                 var typesList = await GetAllTypes();
-                PriorityDataGrid.ItemsSource = typesList;
+                InformationSystemDataGrid.ItemsSource = typesList;
             }
             else
             {
@@ -59,9 +59,9 @@ namespace TaskNinjaHub.Desktop.Windows.Roles.List
 
         private void TypesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (PriorityDataGrid.SelectedItems.Count == 1)
+            if (InformationSystemDataGrid.SelectedItems.Count == 1)
             {
-                Role = (Role)PriorityDataGrid.SelectedItem;
+                Role = (Role)InformationSystemDataGrid.SelectedItem;
                 UpdateButton.IsEnabled = true;
                 DeleteButton.IsEnabled = true;
             }
@@ -94,7 +94,7 @@ namespace TaskNinjaHub.Desktop.Windows.Roles.List
             {
                 await _roleService.DeleteRoleAsync(Role.Id.ToString());
                 var typesList = await GetAllTypes();
-                PriorityDataGrid.ItemsSource = typesList;
+                InformationSystemDataGrid.ItemsSource = typesList;
 
                 MessageBox.Show("Роль успешно удалена");
             }
