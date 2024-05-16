@@ -24,7 +24,6 @@
         <TextBlock x:Name="NameTextBlock" Grid.Column="3" TextWrapping="Wrap" Text="" FontSize="18" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <DataGrid IsReadOnly="true" Grid.Column="1" Grid.ColumnSpan="3"  Name="InformationSystemDataGrid" AutoGenerateColumns="False" Background="White" SelectionChanged="TypesDataGrid_SelectionChanged" BorderBrush="#FF1890FF" Grid.Row="1" Grid.RowSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Логин" Binding="{Binding Email}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Имя " Binding="{Binding FirstName}"></DataGridTextColumn>
