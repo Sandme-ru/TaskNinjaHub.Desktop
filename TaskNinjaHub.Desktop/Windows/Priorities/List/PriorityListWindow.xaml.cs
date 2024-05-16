@@ -49,7 +49,7 @@ public partial class PriorityListWindow : Window
         await InitializeAsync();
     }
 
-    public void InjectTaskTypeService(PriorityService priorityService)
+    public void InjectPriorityService(PriorityService priorityService)
     {
         _priorityService = priorityService;
     }

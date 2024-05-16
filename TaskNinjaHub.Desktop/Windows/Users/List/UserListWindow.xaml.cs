@@ -22,6 +22,7 @@ namespace TaskNinjaHub.Desktop.Windows.Users.List
         private UserService _userService;
 
         public static ApplicationUser ApplicationUser = null!;
+
         public UserListWindow()
         {
             InitializeComponent();
@@ -29,20 +30,19 @@ namespace TaskNinjaHub.Desktop.Windows.Users.List
             UpdateButton.IsEnabled = false;
             DeleteButton.IsEnabled = false;
         }
+
         private async Task InitializeAsync()
         {
             if (_userService != null)
             {
-                var typesList = await GetAllTypes();
-                InformationSystemDataGrid.ItemsSource = typesList;
+                var users = await GetAllUsers();
+                UserDataGrid.ItemsSource = users;
             }
             else
-            {
-                MessageBox.Show("Ошибка: объект _priorityService не был инициализирован.");
-            }
+                MessageBox.Show("Ошибка: объект UserService не был инициализирован.");
         }
 
-        private async Task<IEnumerable<ApplicationUser>> GetAllTypes()
+        private async Task<IEnumerable<ApplicationUser>> GetAllUsers()
         {
             return await _userService.GetAllAsync();
         }
@@ -52,16 +52,16 @@ namespace TaskNinjaHub.Desktop.Windows.Users.List
             await InitializeAsync();
         }
 
-        public void InjectTaskTypeService(UserService userService)
+        public void InjectUserService(UserService userService)
         {
             _userService = userService;
         }
 
         private void TypesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (InformationSystemDataGrid.SelectedItems.Count == 1)
+            if (UserDataGrid.SelectedItems.Count == 1)
             {
-                ApplicationUser = (ApplicationUser)InformationSystemDataGrid.SelectedItem;
+                ApplicationUser = (ApplicationUser)UserDataGrid.SelectedItem;
                 UpdateButton.IsEnabled = true;
                 DeleteButton.IsEnabled = true;
             }
@@ -75,8 +75,8 @@ namespace TaskNinjaHub.Desktop.Windows.Users.List
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             CreateUserWindow createUserWindow = new();
-            UserService userService = new UserService(new HttpClientFactory());
-            RoleService roleService = new RoleService(new HttpClientFactory());
+            var userService = new UserService(new HttpClientFactory());
+            var roleService = new RoleService(new HttpClientFactory());
             createUserWindow.InjectTaskTypeService(userService, roleService);
             this.Hide();
             createUserWindow.Show();
@@ -84,7 +84,7 @@ namespace TaskNinjaHub.Desktop.Windows.Users.List
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            MainMenuWindow mainMenuWindow = new MainMenuWindow();
+            var mainMenuWindow = new MainMenuWindow();
             this.Hide();
             mainMenuWindow.Show();
         }
@@ -94,22 +94,20 @@ namespace TaskNinjaHub.Desktop.Windows.Users.List
             if (ApplicationUser != null!)
             {
                 await _userService.DeleteUserAsync(ApplicationUser.Id);
-                var typesList = await GetAllTypes();
-                InformationSystemDataGrid.ItemsSource = typesList;
+                var typesList = await GetAllUsers();
+                UserDataGrid.ItemsSource = typesList;
 
                 MessageBox.Show("Пользователь успешно удален");
             }
             else
-            {
                 MessageBox.Show("Выберите строку, которую хотите удалить");
-            }
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             UpdateUserWindow updateUserWindow = new();
-            UserService userService = new UserService(new HttpClientFactory());
-            RoleService roleService = new RoleService(new HttpClientFactory());
+            var userService = new UserService(new HttpClientFactory());
+            var roleService = new RoleService(new HttpClientFactory());
             updateUserWindow.InjectTaskTypeService(userService, roleService);
             this.Hide();
             updateUserWindow.Show();

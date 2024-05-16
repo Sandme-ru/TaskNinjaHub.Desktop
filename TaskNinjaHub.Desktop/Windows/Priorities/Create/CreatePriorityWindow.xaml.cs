@@ -39,9 +39,9 @@ public partial class CreatePriorityWindow : Window
             if (result.Success)
             {
                 MessageBox.Show("Приоритет задачи успешно добавлен");
-                PriorityService priorityService = new PriorityService(new HttpClientFactory());
-                PriorityListWindow window = new PriorityListWindow();
-                window.InjectTaskTypeService(priorityService);
+                var priorityService = new PriorityService(new HttpClientFactory());
+                var window = new PriorityListWindow();
+                window.InjectPriorityService(priorityService);
                 window.Show();
                 this.Hide();
             }
@@ -54,18 +54,18 @@ public partial class CreatePriorityWindow : Window
 
     private void backButton_Click(object sender, RoutedEventArgs e)
     {
-        PriorityService priorityService = new PriorityService(new HttpClientFactory());
-        PriorityListWindow window = new PriorityListWindow();
-        window.InjectTaskTypeService(priorityService);
+        var priorityService = new PriorityService(new HttpClientFactory());
+        var window = new PriorityListWindow();
+        window.InjectPriorityService(priorityService);
         window.Show();
         this.Hide();
     }
 
     private void UpdateButton_Click(object sender, RoutedEventArgs e)
     {
-        PriorityService priorityService = new PriorityService(new HttpClientFactory());
-        PriorityListWindow window = new PriorityListWindow();
-        window.InjectTaskTypeService(priorityService);
+        var priorityService = new PriorityService(new HttpClientFactory());
+        var window = new PriorityListWindow();
+        window.InjectPriorityService(priorityService);
         window.Show();
         this.Hide();
     }

@@ -14,7 +14,6 @@ namespace TaskNinjaHub.Desktop.Windows.Users.Create;
 /// </summary>
 public partial class CreateUserWindow : Window
 {
-
     private UserService _userService;
 
     private RoleService _roleService;
@@ -24,6 +23,7 @@ public partial class CreateUserWindow : Window
         InitializeComponent();
         NameTextBlock.Text = PropertyStorage.Username;
     }
+
     public async Task PopulateRoleComboBox()
     {
         var roles = await GetAllTypes();
@@ -32,6 +32,7 @@ public partial class CreateUserWindow : Window
             RoleComboBox.Items.Add(role.Name);
         }
     }
+
     private async Task<IEnumerable<Role>> GetAllTypes()
     {
         return await _roleService.GetAllAsync();
@@ -45,17 +46,29 @@ public partial class CreateUserWindow : Window
 
     private async void CreateButton_Click(object sender, RoutedEventArgs e)
     {
+        await CreateUser();
+    }
+
+    private async Task CreateUser()
+    {
         if (EmailBox.Text.Length > 0 && SurnameBox.Text.Length > 0 && NameBox.Text.Length > 0 && MiddleBox.Text.Length > 0 && PhoneBox.Text.Length > 0 && RoleComboBox.Text.Length > 0)
         {
-            UserDto userDto = new UserDto()
+            if(PasswordBox.Password.Length < 8)
             {
+                MessageBox.Show("Пароль должен быть от 8 символов");
+                return;
+            }
+
+            var userDto = new UserDto()
+            {
+                Id = string.Empty,
                 Email = EmailBox.Text,
                 UserName = EmailBox.Text,
                 FirstName = NameBox.Text,
                 LastName = SurnameBox.Text,
                 MiddleName = MiddleBox.Text,
                 PhoneNumber = PhoneBox.Text,
-                Password = PasswordBox.Text,
+                Password = PasswordBox.Password,
                 Role = RoleComboBox.SelectedItem.ToString(),
             };
 
@@ -63,9 +76,11 @@ public partial class CreateUserWindow : Window
             if (result.IsSuccessStatusCode)
             {
                 MessageBox.Show("Пользователь успешно добавлен");
-                UserListWindow roleListWindow = new();
-                UserService userService = new UserService(new HttpClientFactory());
-                roleListWindow.InjectTaskTypeService(userService);
+
+                var roleListWindow = new UserListWindow();
+                var userService = new UserService(new HttpClientFactory());
+
+                roleListWindow.InjectUserService(userService);
                 this.Hide();
                 roleListWindow.Show();
             }
@@ -74,40 +89,34 @@ public partial class CreateUserWindow : Window
                 string errorMessage;
 
                 if (result.StatusCode == HttpStatusCode.BadRequest)
-                {
-                    errorMessage = await result.Content
-                        .ReadAsStringAsync();
-                }
+                    errorMessage = await result.Content.ReadAsStringAsync();
                 else
-                {
                     errorMessage = $"{result.StatusCode} - {result.ReasonPhrase}";
-                }
 
                 MessageBox.Show($"Ошибка: {errorMessage}");
             }
         }
         else
-        {
             MessageBox.Show("Заполните все поля!");
-        }
     }
 
     private void backButton_Click(object sender, RoutedEventArgs e)
     {
-        UserListWindow roleListWindow = new();
-        UserService userService = new UserService(new HttpClientFactory());
-        roleListWindow.InjectTaskTypeService(userService);
+        NavigateBack();
+    }
+
+    private void NavigateBack()
+    {
+        var userListWindow = new UserListWindow();
+        var userService = new UserService(new HttpClientFactory());
+        userListWindow.InjectUserService(userService);
         this.Hide();
-        roleListWindow.Show();
+        userListWindow.Show();
     }
 
     private void UpdateButton_Click(object sender, RoutedEventArgs e)
     {
-        UserListWindow roleListWindow = new();
-        UserService userService = new UserService(new HttpClientFactory());
-        roleListWindow.InjectTaskTypeService(userService);
-        this.Hide();
-        roleListWindow.Show();
+        NavigateBack();
     }
 
     private async void Window_Loaded(object sender, RoutedEventArgs e)
