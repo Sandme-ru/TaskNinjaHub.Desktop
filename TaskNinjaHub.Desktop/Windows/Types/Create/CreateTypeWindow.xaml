@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="NameTextBlock" Grid.Column="4" TextWrapping="Wrap" Text="" Margin="1,7,0,0" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button Grid.Column="2" Grid.ColumnSpan="2" Name="CreateButton" Content="Обновить" Grid.Row="4" Margin="10,10,10,10" Background="#FF1890FF" BorderBrush="#FF1890FF" Foreground="White" FontSize="14" FontWeight="Bold" Click="CreateButton_Click"/>
-        <Button Grid.Column="2" Name="CancleButton" Content="Отменить" Grid.Row="5" Margin="10,10,10,10" Background="#FFF9F9F9" BorderBrush="#FFF93939" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" Click="CancleButton_Click"/>
+        <Button Grid.Column="2" Name="CancleButton" Content="Отменить" Grid.Row="5" Margin="10,10,10,10" Background="#FFF9F9F9" BorderBrush="#FFF93939" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" Click="UpdateButton_Click"/>
         <TextBlock Grid.Column="2" Grid.Row="3" TextWrapping="Wrap" Text="Название" Grid.ColumnSpan="2" Margin="0,1,195,0"/>
         <TextBox Grid.Column="3" Grid.Row="3" TextWrapping="Wrap" Name="NameBox" Text="" VerticalAlignment="Top" Height="18" Margin="0,1,0,0" />
         <Image Source="/Resources/HubLogoPNG.png"/>

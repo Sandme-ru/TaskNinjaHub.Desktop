@@ -78,7 +78,7 @@ namespace TaskNinjaHub.Desktop.Windows.Users.Update
                     return;
                 }
 
-                if (PasswordBox.IsEnabled = true)
+                if (PasswordBox.IsEnabled)
                 {
                     if (PasswordBox.Text.Length > 0)
                         userDto.Password = PasswordBox.Text;

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using TaskNinjaHub.Application.Entities.Authors.Enums;
+using TaskNinjaHub.Desktop.Models.Enums;
 
 namespace TaskNinjaHub.Desktop.Models.User;
 
