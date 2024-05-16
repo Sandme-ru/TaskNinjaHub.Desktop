@@ -31,7 +31,7 @@ public partial class PriorityListWindow : Window
         if (_priorityService != null)
         {
             var typesList = await GetAllTypes();
-            PriorityDataGrid.ItemsSource = typesList;
+            InformationSystemDataGrid.ItemsSource = typesList;
         }
         else
         {
@@ -56,9 +56,9 @@ public partial class PriorityListWindow : Window
 
     private void TypesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (PriorityDataGrid.SelectedItems.Count == 1)
+        if (InformationSystemDataGrid.SelectedItems.Count == 1)
         {
-            Priority = (Priority)PriorityDataGrid.SelectedItem;
+            Priority = (Priority)InformationSystemDataGrid.SelectedItem;
             UpdateButton.IsEnabled = true;
             DeleteButton.IsEnabled = true;
         }
@@ -90,7 +90,7 @@ public partial class PriorityListWindow : Window
         {
             await _priorityService.DeleteAsync(Priority.Id);
             var typesList = await GetAllTypes();
-            PriorityDataGrid.ItemsSource = typesList;
+            InformationSystemDataGrid.ItemsSource = typesList;
 
             MessageBox.Show("Приоритет успешно удален");
         }

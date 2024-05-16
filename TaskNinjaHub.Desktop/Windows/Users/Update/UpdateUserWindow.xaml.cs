@@ -61,6 +61,7 @@ namespace TaskNinjaHub.Desktop.Windows.Users.Update
             {
                 UserDto userDto = new UserDto()
                 {
+                    Id = _applicationUser.Id,
                     Email = EmailBox.Text,
                     UserName = EmailBox.Text,
                     FirstName = NameBox.Text,
@@ -71,14 +72,23 @@ namespace TaskNinjaHub.Desktop.Windows.Users.Update
                 };
 
                 var exisiRoles = await _userService.GetAllAsync();
-                if (exisiRoles.Any(x => x.UserName == NameBox.Text))
+                if (exisiRoles.Any(x => x.UserName == EmailBox.Text))
                 {
                     MessageBox.Show("Такой пользователь уже существует");
                     return;
                 }
 
-                if (PasswordBox.IsEnabled = true && PasswordBox.Text.Length > 0)
-                    userDto.Password = PasswordBox.Text;
+                if (PasswordBox.IsEnabled)
+                {
+                    if (PasswordBox.Text.Length > 0)
+                        userDto.Password = PasswordBox.Text;
+                    else
+                    {
+                        MessageBox.Show("Введите пароль");
+                        return;
+                    }
+                }
+
 
                 var result = await _userService.EditUserAsync(userDto);
 

@@ -29,12 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="TaskNinjaHub.Application">
-      <HintPath>..\..\TaskNinjaHub\TaskNinjaHub.Application\bin\Debug\net8.0\TaskNinjaHub.Application.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resources\HubLogoPNG.ico" />
     <Resource Include="Resources\HubLogoPNG.png" />
   </ItemGroup>

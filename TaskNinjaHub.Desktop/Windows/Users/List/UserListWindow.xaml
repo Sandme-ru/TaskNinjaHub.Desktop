@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskNinjaHub.Desktop.Windows.Users.List"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-                Title="Список пользователей" Height="450" Width="800" MinHeight="400" MinWidth="700" Loaded="Window_Loaded_1">
+                Title="Список пользователей" Height="500" Width="900" MinHeight="450" MinWidth="800" Loaded="Window_Loaded_1">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="46*"/>
@@ -24,7 +24,6 @@
         <TextBlock x:Name="NameTextBlock" Grid.Column="3" TextWrapping="Wrap" Text="" FontSize="18" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <DataGrid IsReadOnly="true" Grid.Column="1" Grid.ColumnSpan="3"  Name="InformationSystemDataGrid" AutoGenerateColumns="False" Background="White" SelectionChanged="TypesDataGrid_SelectionChanged" BorderBrush="#FF1890FF" Grid.Row="1" Grid.RowSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Логин" Binding="{Binding Email}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Имя " Binding="{Binding FirstName}"></DataGridTextColumn>
