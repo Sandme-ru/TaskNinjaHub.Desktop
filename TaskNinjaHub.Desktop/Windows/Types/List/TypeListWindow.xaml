@@ -32,7 +32,7 @@
         <Button Grid.Column="3" Name="DeleteButton" Content="Удалить" Grid.Row="3" Margin="10,10,10,10" FontSize="12" FontWeight="Bold" Background="#FFF93939" BorderBrush="#FFF93939" Foreground="White" Click="DeleteButton_Click"/>
         <Button fa:Awesome.Content="ArrowLeft" Background="White" BorderBrush="#FFFFFDFD" Name="backButton" Click="backButton_Click" Grid.Row="1"/>
         <Image Grid.ColumnSpan="2" Source="/Resources/HubLogoPNG.png"/>
-        <Label Grid.Column="2" Grid.ColumnSpan="1" Content="Список приоритетов" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Column="2" Grid.ColumnSpan="1" Content="Список типов задач" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Border BorderBrush="#FF1890FF" BorderThickness="0, 0, 0, 1" Grid.ColumnSpan="6"/>
     </Grid>
 </Window>

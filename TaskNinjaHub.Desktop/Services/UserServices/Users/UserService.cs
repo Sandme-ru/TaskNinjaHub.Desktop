@@ -22,7 +22,7 @@ public class UserService(IHttpClientFactory httpClientFactory)
         }
     }
 
-    public async Task<HttpResponseMessage> AddUserAsync(UserDto user)
+    public async Task<HttpResponseMessage> AddUserAsync(AddUserDto user)
     {
         try
         {

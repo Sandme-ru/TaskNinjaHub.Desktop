@@ -26,7 +26,7 @@ namespace TaskNinjaHub.Desktop
             {
                 Authority = "https://auth.sandme.ru",
                 ClientId = "TaskNinjaHub",
-                ClientSecret = "901564A5-E7FE-42CB-B10D-61EF6A8F3655",
+                ClientSecret = "",
                 Scope = "openid profile email",
                 RedirectUri = "http://127.0.0.1/TaskNinjaHub.Desktop",
                 Browser = new WpfEmbeddedBrowser()

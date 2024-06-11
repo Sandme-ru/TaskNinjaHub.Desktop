@@ -4,6 +4,7 @@ using TaskNinjaHub.Desktop.Models.User;
 using TaskNinjaHub.Desktop.Services.UserServices.Roles;
 using TaskNinjaHub.Desktop.Services.UserServices.Users;
 using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
+using TaskNinjaHub.Desktop.Utils.Storages;
 using TaskNinjaHub.Desktop.Windows.Users.List;
 
 namespace TaskNinjaHub.Desktop.Windows.Users.Update;
@@ -68,19 +69,30 @@ public partial class UpdateUserWindow : Window
         {
             var userDto = new UserDto()
             {
-                Id = _applicationUser.Id,
-                Email = EmailBox.Text,
-                UserName = EmailBox.Text,
-                FirstName = NameBox.Text,
-                LastName = SurnameBox.Text,
-                MiddleName = MiddleBox.Text,
-                PhoneNumber = PhoneBox.Text,
-                Role = RoleComboBox.SelectedItem.ToString(),
-            };
+                UserDto userDto = new UserDto()
+                {
+                    Id = _applicationUser.Id,
+                    Email = EmailBox.Text,
+                    UserName = EmailBox.Text,
+                    FirstName = NameBox.Text,
+                    LastName = SurnameBox.Text,
+                    MiddleName = MiddleBox.Text,
+                    PhoneNumber = PhoneBox.Text,
+                    Role = RoleComboBox.SelectedItem.ToString(),
+                };
 
-            if (PasswordBox.IsEnabled)
-            {
-                switch (PasswordBox.Password.Length)
+                var exisiRoles = await _userService.GetAllAsync();
+                var exitName = exisiRoles.FirstOrDefault(x => x.UserName == EmailBox.Text);
+                if (exitName != null)
+                {
+                    if (exitName.UserName != _applicationUser.UserName)
+                    {
+                        MessageBox.Show("Такой пользователь уже существует");
+                        return;
+                    }
+                }
+
+                if (PasswordBox.IsEnabled)
                 {
                     case < 8:
                         MessageBox.Show("Пароль должен быть от 8 символов");
