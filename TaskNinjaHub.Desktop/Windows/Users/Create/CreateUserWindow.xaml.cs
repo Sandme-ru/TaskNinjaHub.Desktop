@@ -59,7 +59,7 @@ public partial class CreateUserWindow : Window
                 return;
             }
 
-            AddUserDto userDto = new AddUserDto()
+            var userDto = new UserDto()
             {
                 Id = string.Empty,
                 Email = EmailBox.Text,
@@ -68,8 +68,8 @@ public partial class CreateUserWindow : Window
                 LastName = SurnameBox.Text,
                 MiddleName = MiddleBox.Text,
                 PhoneNumber = PhoneBox.Text,
-                Password = PasswordBox.Text,
-                Role = RoleComboBox.SelectedItem.ToString() ?? "Client",
+                Password = PasswordBox.Password,
+                Role = RoleComboBox.SelectedItem.ToString(),
             };
 
             var result = await _userService.AddUserAsync(userDto);

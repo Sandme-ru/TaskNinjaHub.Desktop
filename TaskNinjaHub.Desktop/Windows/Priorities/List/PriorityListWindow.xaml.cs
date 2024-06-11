@@ -74,7 +74,6 @@ public partial class PriorityListWindow : Window
         CreatePriorityWindow createPriorityWindow = new CreatePriorityWindow();
         PriorityService priorityService = new PriorityService(new HttpClientFactory());
         createPriorityWindow.InjectTaskTypeService(priorityService);
-        createPriorityWindow.Show();
         this.Hide();
     }
 
