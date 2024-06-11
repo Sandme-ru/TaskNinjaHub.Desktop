@@ -47,7 +47,7 @@ public partial class CreateUserWindow : Window
     {
         if (EmailBox.Text.Length > 0 && SurnameBox.Text.Length > 0 && NameBox.Text.Length > 0 && MiddleBox.Text.Length > 0 && PhoneBox.Text.Length > 0 && RoleComboBox.Text.Length > 0)
         {
-            UserDto userDto = new UserDto()
+            AddUserDto userDto = new AddUserDto()
             {
                 Email = EmailBox.Text,
                 UserName = EmailBox.Text,
@@ -56,7 +56,7 @@ public partial class CreateUserWindow : Window
                 MiddleName = MiddleBox.Text,
                 PhoneNumber = PhoneBox.Text,
                 Password = PasswordBox.Text,
-                Role = RoleComboBox.SelectedItem.ToString(),
+                Role = RoleComboBox.SelectedItem.ToString() ?? "Client",
             };
 
             var result = await _userService.AddUserAsync(userDto);

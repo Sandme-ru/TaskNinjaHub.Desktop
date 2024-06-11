@@ -4,6 +4,7 @@ using TaskNinjaHub.Desktop.Models.User;
 using TaskNinjaHub.Desktop.Services.UserServices.Roles;
 using TaskNinjaHub.Desktop.Services.UserServices.Users;
 using TaskNinjaHub.Desktop.Utils.HttpClientFactory;
+using TaskNinjaHub.Desktop.Utils.Storages;
 using TaskNinjaHub.Desktop.Windows.Users.List;
 
 namespace TaskNinjaHub.Desktop.Windows.Users.Update
@@ -72,10 +73,14 @@ namespace TaskNinjaHub.Desktop.Windows.Users.Update
                 };
 
                 var exisiRoles = await _userService.GetAllAsync();
-                if (exisiRoles.Any(x => x.UserName == EmailBox.Text))
+                var exitName = exisiRoles.FirstOrDefault(x => x.UserName == EmailBox.Text);
+                if (exitName != null)
                 {
-                    MessageBox.Show("Такой пользователь уже существует");
-                    return;
+                    if (exitName.UserName != _applicationUser.UserName)
+                    {
+                        MessageBox.Show("Такой пользователь уже существует");
+                        return;
+                    }
                 }
 
                 if (PasswordBox.IsEnabled)
